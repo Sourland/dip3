@@ -1,0 +1,39 @@
+function radianceMap = mergeLDRStack(imgStack , exposureTimes , option)
+%MERGELDRSTACK Summary of this function goes here
+%   Detailed explanation goes here
+    K = size(imgStack, 2);
+    [X, Y, ~] = size(imgStack{1});
+    radianceMap = zeros(X, Y, 3);
+    
+    weightsRed = [];
+    gln_red = [];
+    for k = 1:K
+        img = imgStack{k};
+        weightsRed = cat(3, weightsRed, weightingFunction(img(:, :, 1), exposureTimes(k), option));
+        gln_red = cat(3, gln_red, img(:, : , 1) - log(exposureTimes(k)));
+    end
+       
+    
+    weightsGreen = [];
+    gln_green = [];
+    for k = 1:K
+        img = imgStack{k};
+        weightsGreen = cat(3, weightsGreen, weightingFunction(img(:, :, 2), exposureTimes(k), option));
+        gln_green = cat(3, gln_green, img(:, : , 2) - log(exposureTimes(k)));
+    end
+    
+    weightsBlue = [];
+    gln_blue = [];
+    for k = 1:K
+        img = imgStack{k};
+        weightsBlue = cat(3,weightsBlue, weightingFunction(img(:, :, 3), exposureTimes(k), option));
+        gln_blue = cat(3, gln_blue, img(:, : , 1) - log(exposureTimes(k)));
+    end
+    
+    
+   
+    
+    
+    
+    
+
