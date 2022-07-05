@@ -14,13 +14,14 @@ function radianceMap = mergeLDRStack(imgStack , exposureTimes , option)
         tk = exposureTimes(k);
         currentImage = imgStack{k};
         weightOfZ= weightingFunction(currentImage, tk, option);
-        totalWeights = totalWeights + weightOfZ;        
-        totalMetric = totalMetric + weightOfZ .* (log(currentImage) - log(tk));
-        
+        totalWeights = totalWeights + weightOfZ;     
+        imageLog = log(currentImage);
+        imageLog(isinf(imageLog)) = 0;
+        totalMetric = totalMetric + weightOfZ .* (imageLog - log(tk));
     end
    
     [totalMetric, totalWeights] = managePixelOutliers(totalMetric,...
-        totalWeights, imgStack{1});
+        totalWeights, imgStack{8});
     
     radianceMap = totalMetric ./ totalWeights;
     

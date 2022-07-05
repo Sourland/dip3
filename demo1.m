@@ -55,7 +55,7 @@ radianceMapBluePhoton = mergeLDRStack(imgStackBlue, t, 'Photon');
 % imagesc(radianceMapBlueUniform)
 % title('Uniform Blue')
 % colorbar
-% colormap gray
+% colormap bone
 
 figure()
 imagesc(radianceMapRedTent)
@@ -73,43 +73,43 @@ figure()
 imagesc(radianceMapBlueTent)
 title('blue')
 colorbar
-colormap gray
+colormap bone
 
 % %% Plot Gaussian HDR for each RGB Channel
 % figure()
 % imagesc(radianceMapRedGaussian)
 % title('red')
 % colorbar
-% colormap gray
+% colormap bone
 % 
 % figure()
 % imagesc(radianceMapGreenGaussian)
 % title('green')
 % colorbar
-% colormap gray
+% colormap bone
 % 
 % figure()
 % imagesc(radianceMapBlueGaussian)
 % title('blue')
 % colorbar
-% colormap gray
+% colormap bone
 % 
-% %% Plot Pgrayon HDR for each RGB Channel
+% %% Plot Pboneon HDR for each RGB Channel
 % figure()
 % imagesc(radianceMapRedPhoton)
 % title('red')
 % colorbar
-% colormap gray
+% colormap bone
 % 
 % figure()
 % imagesc(radianceMapGreenPhoton)
 % title('green')
 % colorbar
-% colormap gray
+% colormap bone
 % 
 % figure()
 % imagesc(radianceMapBluePhoton)
 % title('blue')
 % colorbar
-% colormap gray
+% colormap bone
 
