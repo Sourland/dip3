@@ -4,8 +4,9 @@
 function [radianceMapRed, radianceMapGreen, radianceMapBlue] = mergeLDRStack(imgStack , exposureTimes , option)
 %MERGELDRSTACK Summary of this function goes here
 %   Detailed explanation goes here
+    global Zmax;
     
-    K = size(imgStack, 2);\
+    K = size(imgStack, 2);
     [X ,Y, ~] = size(imgStack{1});
     
     totalWeightsRed = zeros(X,Y);
@@ -28,7 +29,7 @@ function [radianceMapRed, radianceMapGreen, radianceMapBlue] = mergeLDRStack(img
         
         channel = currentImage(:, :, 2);      
         weightOfZ= weightingFunction(channel, exposureTimes(k), option);
-        totalWeightsGreen = totalWeightsRed + weightOfZ;        
+        totalWeightsGreen = totalWeightsGreen + weightOfZ;        
         HDR_Green = HDR_Green + weightOfZ .* (log(channel) - log(tk));
        
         channel = currentImage(:, :, 3);      
@@ -37,11 +38,15 @@ function [radianceMapRed, radianceMapGreen, radianceMapBlue] = mergeLDRStack(img
         HDR_Blue = HDR_Blue + weightOfZ .* (log(channel) - log(tk));
         
     end
+    
     radianceMapRed = HDR_Red ./ totalWeightsRed;
+    radianceMapRed(totalWeightsRed == 0) = Zmax;
     
     radianceMapGreen = HDR_Green ./ totalWeightsGreen;
+    radianceMapGreen(totalWeightsGreen == 0) = Zmax;
     
     radianceMapBlue = HDR_Blue ./ totalWeightsBlue;
+    radianceMapBlue(totalWeightsBlue == 0) = Zmax;
     
     
     
