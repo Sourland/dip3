@@ -21,7 +21,7 @@ end
 t =  [1/2500, 1/1000, 1/500, 1/250, 1/125, 1/60, 1/30, 1/15, 1/8, 1/4, 1/2, 1, 2, 4, 8, 15];
 
 %gamma = 0.8;
-gamma = 1;
+gamma = 1.2;
 %% Get the radiance maps
 radianceMapRedUniform = mergeLDRStack(imgStackRed, t, 'Uniform');
 radianceMapGreenUniform = mergeLDRStack(imgStackGreen, t, 'Uniform');
