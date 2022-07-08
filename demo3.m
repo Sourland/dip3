@@ -15,40 +15,49 @@ Z_red = [];
 Z_green = [];
 Z_blue = [];
 
-samplingRate = 32;
+
 
 for file=1:totalFiles
-   currentfilename = imagefiles(file).name;
-   currentimage = imread(currentfilename);
-   currentimage = currentimage(1:samplingRate:end, 1:samplingRate:end,:);
-   [X, Y, ~] = size(currentimage);
-   
-   img = reshape(currentimage(:,:,1), [X*Y 1]);
-   Z_red(:,file) = img;
-   
-   img = reshape(currentimage(:,:,2), [X*Y 1]);
-   Z_green(:,file) = img;
-   
-   img = reshape(currentimage(:,:,3), [X*Y 1]);
-   Z_blue(:,file) = img;
+    currentfilename = imagefiles(file).name;
+    currentimage = imread(currentfilename);
 
+
+    samplingRate = 32;
+    tempImage = currentimage(1:samplingRate:end, 1:samplingRate:end,:);
+    [X, Y, ~] = size(tempImage);
+    img = reshape(tempImage(:,:,1), [X*Y 1]);
+    Z_red(:,file) = img;
+
+    samplingRate = 64;
+    tempImage = currentimage(1:samplingRate:end, 1:samplingRate:end,:);
+    [X, Y, ~] = size(tempImage);
+    img = reshape(tempImage(:,:,2), [X*Y 1]);
+    Z_green(:,file) = img;
+
+    samplingRate = 64;
+    tempImage = currentimage(1:samplingRate:end, 1:samplingRate:end,:);
+    [X, Y, ~] = size(tempImage);
+    img = reshape(tempImage(:,:,3), [X*Y 1]);
+    Z_blue(:,file) = img;
+   
 end
+weightingFnc = 'Uniform';
 
 tk =  [1/2500, 1/1000, 1/500, 1/250, 1/125, 1/60, 1/30, 1/15, 1/8, 1/4, 1/2, 1, 2, 4, 8, 15];
 
 w_red = [];
 for k=1:totalFiles
-    w_red(:,k) = weightingFunction(im2double(mat2gray(Z_red(:,k))), tk(k), 'Gaussian');
+    w_red(:,k) = weightingFunction(im2double(mat2gray(Z_red(:,k))), tk(k), weightingFnc);
 end
 
 w_green = [];
 for k=1:totalFiles
-    w_green(:,k) = weightingFunction(im2double(mat2gray(Z_green(:,k))), tk(k), 'Gaussian');
+    w_green(:,k) = weightingFunction(im2double(mat2gray(Z_green(:,k))), tk(k), weightingFnc);
 end
 
 w_blue = [];
 for k=1:totalFiles
-    w_blue(:,k) = weightingFunction(im2double(mat2gray(Z_blue(:,k))), tk(k), 'Gaussian');
+    w_blue(:,k) = weightingFunction(im2double(mat2gray(Z_blue(:,k))), tk(k), weightingFnc);
 end
 
 lightLevels = 0:255;
@@ -61,7 +70,7 @@ plot(redReponse, lightLevels)
 toc
 
 tic
-greenReponse = estimateResponseCurve(Z_green, tk, 2, w_green);
+greenReponse = estimateResponseCurve(Z_green, tk, 5, w_green);
 figure()
 grid on
 plot(greenReponse, lightLevels)

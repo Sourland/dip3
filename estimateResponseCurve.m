@@ -17,7 +17,7 @@ function responseCurve = estimateResponseCurve(Z, exposureTimes, smoothingLamda,
             k=k+1;
         end
     end
-    toc
+    
     %% Fix the curve by setting its middle value to 0
     A(k,129) = 1;
     k=k+1;
@@ -28,9 +28,9 @@ function responseCurve = estimateResponseCurve(Z, exposureTimes, smoothingLamda,
      A(k,i+2)=smoothingLamda*weights(i+1,1);
      k=k+1;
     end
-    
+    toc
     %% Solve the system using SVD
-    x = A\b;
+    x = A\b
     responseCurve = x(1:n);
  
 end
