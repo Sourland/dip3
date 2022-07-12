@@ -21,19 +21,7 @@ function radianceMap = mergeLDRStack(imgStack , exposureTimes , option)
     end
    
     [totalMetric, totalWeights] = managePixelOutliers(totalMetric,...
-        totalWeights, imgStack{8});
+        totalWeights, imgStack{1});
     
     radianceMap = totalMetric ./ totalWeights;
-    
-   
-    
-    
-    
-    
-    
-   
-    
-    
-    
-    
-
+end

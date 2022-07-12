@@ -11,6 +11,8 @@ function w = weightingFunction(z, tk, option)
         w = ones(X,Y);
     elseif strcmp(option, 'Tent')
         w = min(z, 1-z);
+     elseif strcmp(option, 'TentCurve')
+        w = min(z, 255-z);
     elseif strcmp(option, 'Gaussian')
         t = 4 / (0.5)^2;
         w = exp(-t .* (z - 0.5).^2);
