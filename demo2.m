@@ -24,7 +24,7 @@ gamma1 = 0.8;
 gamma2 = 1.4;
 my_gamma = 1.21;
 
-gamma = my_gamma;
+gamma = 1;
 % Get the radiance maps
 radianceMapRedUniform = mergeLDRStack(imgStackRed, t, 'Uniform');
 radianceMapGreenUniform = mergeLDRStack(imgStackGreen, t, 'Uniform');
@@ -63,21 +63,25 @@ HDRImageUniform = cat(3, radianceMapRedUniform, radianceMapGreenUniform, radianc
 figure()
 imshow(HDRImageUniform);
 title('HDR Image, Uniform')
+imwrite(HDRImageUniform,append('demo2RESULTS/hdruni-gamma', num2str(gamma), '.png'))
 
 HDRImageTent = cat(3, radianceMapRedTent, radianceMapGreenTent, radianceMapBlueTent);
 figure()
 imshow(HDRImageTent);
 title('HDR Image, Tent')
+imwrite(HDRImageTent,append('demo2RESULTS/hdrtent-gamma', num2str(gamma), '.png'))
 
 HDRImageGaussian = cat(3, radianceMapRedGaussian, radianceMapGreenGaussian, radianceMapBlueGaussian);
 figure()
 imshow(HDRImageGaussian);
 title('HDR Image, Gaussian')
+imwrite(HDRImageGaussian,append('demo2RESULTS/hdrgauss-gamma', num2str(gamma), '.png'))
 
 HDRImagePhoton = cat(3, radianceMapRedPhoton, radianceMapGreenPhoton, radianceMapBluePhoton);
 figure()
 imshow(HDRImagePhoton);
 title('HDR Image, Photon')
+imwrite(HDRImagePhoton,append('demo2RESULTS/hdrphoton-gamma', num2str(gamma), '.png'))
 
 grayPalettePosition = [250 1350; 300 1350; 350 1350; 400 1350; 450 1350; 500 1350];
 

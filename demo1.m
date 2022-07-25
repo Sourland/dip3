@@ -43,18 +43,21 @@ imagesc(radianceMapRedUniform)
 title('Uniform Red')
 colorbar
 colormap hot
+saveas(gcf,'demo1RESULTS/reduni.png')
 
 figure()
 imagesc(radianceMapGreenUniform)
 title('Uniform Green')
 colorbar
 colormap summer
+saveas(gcf,'demo1RESULTS/greenuni.png')
 
 figure()
 imagesc(radianceMapBlueUniform)
 title('Uniform Blue')
 colorbar
 colormap bone
+saveas(gcf,'demo1RESULTS/blueuni.png')
 
 %% Plot Tent HDR for each RGB Channel
 figure()
@@ -62,18 +65,21 @@ imagesc(radianceMapRedTent)
 title('red')
 colorbar
 colormap hot
+saveas(gcf,'demo1RESULTS/redtent.png')
 
 figure()
 imagesc(radianceMapGreenTent)
 title('green')
 colorbar
 colormap summer
+saveas(gcf,'demo1RESULTS/greentent.png')
 
 figure()
 imagesc(radianceMapBlueTent)
 title('blue')
 colorbar
 colormap bone
+saveas(gcf,'demo1RESULTS/bluetent.png')
 
 %% Plot Gaussian HDR for each RGB Channel
 figure()
@@ -81,18 +87,21 @@ imagesc(radianceMapRedGaussian)
 title('red')
 colorbar
 colormap hot
+saveas(gcf,'demo1RESULTS/redgauss.png')
 
 figure()
 imagesc(radianceMapGreenGaussian)
 title('green')
 colorbar
 colormap summer
+saveas(gcf,'demo1RESULTS/greengauss.png')
 
 figure()
 imagesc(radianceMapBlueGaussian)
 title('blue')
 colorbar
 colormap bone
+saveas(gcf,'demo1RESULTS/bluegauss.png')
 
 %% Plot Photon HDR for each RGB Channel
 figure()
@@ -100,18 +109,21 @@ imagesc(radianceMapRedPhoton)
 title('red')
 colorbar
 colormap hot
+saveas(gcf,'demo1RESULTS/redphoton.png')
 
 figure()
 imagesc(radianceMapGreenPhoton)
 title('green')
 colorbar
 colormap summer
+saveas(gcf,'demo1RESULTS/greenphoton.png')
 
 figure()
 imagesc(radianceMapBluePhoton)
 title('blue')
 colorbar
 colormap bone
+saveas(gcf,'demo1RESULTS/bluephoton.png')
 %% Plot Histograms
 bins = 256;
 
@@ -163,3 +175,4 @@ title('Green Photon Histogram')
 subplot(4,3,12)
 histogram(rescale(radianceMapBluePhoton, 0, 255), bins)
 title('Blue Photon Histogram')
+saveas(gcf,'demo1RESULTS/HISTOGRAM.png')

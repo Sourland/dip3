@@ -57,7 +57,7 @@ lightLevels = 0:255;
 figure()
 tic
 redReponseImage1 = estimateResponseCurve(Z_red, tk, 100, weightingFnc);
-subplot(1,3,1)
+subplot(3,1,1)
 hold on
 title('Red Channel Response Curve')
 grid on
@@ -66,7 +66,7 @@ toc
 
 tic
 greenReponseImage1 = estimateResponseCurve(Z_green, tk, 100, weightingFnc);
-subplot(1,3,2)
+subplot(3,1,2)
 hold on
 title('Green Channel Response Curve')
 grid on
@@ -75,27 +75,31 @@ toc
 
 tic
 blueReponseImage1 = estimateResponseCurve(Z_blue, tk, 100, weightingFnc);
-subplot(1,3,3)
+subplot(3,1,3)
 hold on
 title('Blue Channel Response Curve')
 plot(blueReponseImage1, lightLevels, 'b')
 grid on
 toc
+saveas(gcf,'demo3RESULTS/curve1.png')
 
 radianceMapRed = mergeCalibratedLDRStack(imgStackRed1, tk, 'Tent', redReponseImage1);
 figure()
 imagesc(radianceMapRed)
 colormap hot
+saveas(gcf,'demo3RESULTS/redtent1.png')
 
 radianceMapGreen = mergeCalibratedLDRStack(imgStackGreen1, tk, 'Tent', greenReponseImage1);
 figure()
 imagesc(radianceMapGreen)
 colormap summer
+saveas(gcf,'demo3RESULTS/greentent1.png')
 
 radianceMapBlue = mergeCalibratedLDRStack(imgStackBlue1, tk, 'Tent', blueReponseImage1);
 figure()
 imagesc(radianceMapBlue)
 colormap bone
+saveas(gcf,'demo3RESULTS/bluetent1.png')
 
 gamma = 1.2;
 radianceMapRed = toneMapping(radianceMapRed, gamma);
@@ -106,6 +110,7 @@ HDRImageTent = cat(3, radianceMapRed, radianceMapGreen, radianceMapBlue);
 figure()
 imshow(HDRImageTent);
 title('HDR Image, Tent, CALIBRATED')
+saveas(gcf,'demo3RESULTS/hdrtent1.png')
 
 %% Image2
 
@@ -150,16 +155,17 @@ lightLevels = 0:255;
 figure()
 tic
 redReponseImage2 = estimateResponseCurve(Z_red, tk, 100, weightingFnc);
-subplot(1,3,1)
+subplot(3,1,1)
 hold on
 title('Red Channel Response Curve')
 grid on
 plot(redReponseImage2, lightLevels, 'r')
+
 toc
 
 tic
 greenReponseImage2 = estimateResponseCurve(Z_green, tk, 100, weightingFnc);
-subplot(1,3,2)
+subplot(3,1,2)
 hold on
 title('Green Channel Response Curve')
 grid on
@@ -168,27 +174,33 @@ toc
 
 tic
 blueReponseImage2 = estimateResponseCurve(Z_blue, tk, 100, weightingFnc);
-subplot(1,3,3)
+subplot(3,1,3)
 hold on
 title('Blue Channel Response Curve')
 plot(blueReponseImage2, lightLevels, 'b')
 grid on
 toc
+saveas(gcf,'demo3RESULTS/curves2.png')
 
-radianceMapRed = mergeCalibratedLDRStack(imgStackRed2, tk, 'Tent', redReponseImage1);
+
+radianceMapRed = mergeCalibratedLDRStack(imgStackRed2, tk, 'Tent', redReponseImage2);
 figure()
 imagesc(radianceMapRed)
 colormap hot
+saveas(gcf,'demo3RESULTS/redtent2.png')
 
-radianceMapGreen = mergeCalibratedLDRStack(imgStackGreen2, tk, 'Tent', greenReponseImage1);
+radianceMapGreen = mergeCalibratedLDRStack(imgStackGreen2, tk, 'Tent', greenReponseImage2);
 figure()
 imagesc(radianceMapGreen)
 colormap summer
+saveas(gcf,'demo3RESULTS/greentent2.png')
 
-radianceMapBlue = mergeCalibratedLDRStack(imgStackBlue2, tk, 'Tent', blueReponseImage1);
+radianceMapBlue = mergeCalibratedLDRStack(imgStackBlue2, tk, 'Tent', blueReponseImage2);
 figure()
 imagesc(radianceMapBlue)
 colormap bone
+saveas(gcf,'demo3RESULTS/bluetent2.png')
+
 
 gamma = 0.7;
 radianceMapRed = toneMapping(radianceMapRed, gamma);
@@ -199,3 +211,4 @@ HDRImageTent = cat(3, radianceMapRed, radianceMapGreen, radianceMapBlue);
 figure()
 imshow(HDRImageTent);
 title('HDR Image, Tent, CALIBRATED')
+saveas(gcf,'demo3RESULTS/hdrtent2.png')
